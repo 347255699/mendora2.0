@@ -1,0 +1,10 @@
+*.iml
+/.idea/
+
+*/target/
+*/test/
+/.vertx/
+
+mendora-router/.vertx/
+mendora-kernel/.vertx/
+/log/
