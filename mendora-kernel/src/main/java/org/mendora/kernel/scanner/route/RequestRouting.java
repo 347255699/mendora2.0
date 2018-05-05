@@ -1,4 +1,4 @@
-package org.mendora.scanner.route;
+package org.mendora.kernel.scanner.route;
 
 import io.vertx.core.http.HttpMethod;
 

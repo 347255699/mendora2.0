@@ -1,4 +1,4 @@
-package org.mendora.scanner.base;
+package org.mendora.kernel.scanner.base;
 
 import java.util.List;
 

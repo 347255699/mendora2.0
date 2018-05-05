@@ -1,4 +1,4 @@
-package org.mendora.properties;
+package org.mendora.kernel.properties;
 
 import lombok.SneakyThrows;
 

@@ -1,13 +1,14 @@
-package org.mendora.cluster;
+package org.mendora.kernel.cluster;
 
 import com.google.inject.Injector;
 import com.hazelcast.config.*;
 import io.vertx.core.VertxOptions;
 import io.vertx.rxjava.core.Vertx;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
-import org.mendora.properties.Const;
-import org.mendora.properties.SysConfig;
-import org.mendora.verticles.VerticleScanner;
+import org.mendora.kernel.binder.VertxBinder;
+import org.mendora.kernel.properties.Const;
+import org.mendora.kernel.properties.SysConfig;
+import org.mendora.kernel.scanner.verticle.VerticleScanner;
 
 import java.util.Arrays;
 
@@ -18,9 +19,10 @@ import java.util.Arrays;
  */
 public class Cluster {
     /**
-     * launching Vertx micro kernel and deploy verticles.
+     * launching Vertx micro kernel and deploy verticle.
      */
     public static void launch(Injector injector) {
+        ClassLoader classLoader = injector.getInstance(ClassLoader.class);
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
         /** hazelcast configuration **/
         Config config = new Config()
@@ -43,9 +45,9 @@ public class Cluster {
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
                 Vertx vertx = res.result();
-                injector.injectMembers(vertx);
-                VerticleScanner scanner = injector.getInstance(VerticleScanner.class);
-                scanner.scan(sysConfig.property(Const.VERTICLE_PACKAGE), injector);
+                Injector subInjector = injector.createChildInjector(new VertxBinder(vertx));
+                VerticleScanner scanner = subInjector.getInstance(VerticleScanner.class);
+                scanner.scan(sysConfig.property(Const.VERTICLE_PACKAGE), subInjector);
             }
         });
     }

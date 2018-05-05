@@ -11,5 +11,15 @@
 
     <artifactId>mendora-Router</artifactId>
 
-
+    <properties>
+        <common.version>1.0-SNAPSHOT</common.version>
+        <main.class>org.mendora.web.ApplicationMain</main.class>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.mendora</groupId>
+            <artifactId>mendora-kernel</artifactId>
+            <version>${common.version}</version>
+        </dependency>
+    </dependencies>
 </project>

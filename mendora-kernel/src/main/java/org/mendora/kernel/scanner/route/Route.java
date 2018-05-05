@@ -1,4 +1,4 @@
-package org.mendora.scanner.route;
+package org.mendora.kernel.scanner.route;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

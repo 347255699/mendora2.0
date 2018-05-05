@@ -1,4 +1,4 @@
-package org.mendora.properties;
+package org.mendora.kernel.properties;
 
 /**
  * created by:xmf
@@ -21,4 +21,6 @@ public interface Const {
     String CLUSTER_SERVER_IPS = "cluster.server.ips";
     // web
     String WEB_LISTEN_PORT = "web.listen.port";
+    String WEB_ROUTE_PACKAGE = "web.route.package";
+    String WEB_REQUEST_BODY_SIZE="web.request.body.size";
 }

@@ -1,4 +1,4 @@
-package org.mendora.scanner.route;
+package org.mendora.kernel.scanner.route;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -7,9 +7,9 @@ import io.vertx.rxjava.ext.web.Router;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.mendora.properties.Const;
-import org.mendora.properties.SysConfig;
-import org.mendora.scanner.base.PackageScannerImpl;
+import org.mendora.kernel.properties.Const;
+import org.mendora.kernel.properties.SysConfig;
+import org.mendora.kernel.scanner.base.PackageScannerImpl;
 import rx.Observable;
 
 import java.lang.reflect.Method;

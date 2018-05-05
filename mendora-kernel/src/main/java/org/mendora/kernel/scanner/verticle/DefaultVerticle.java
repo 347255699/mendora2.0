@@ -1,11 +1,11 @@
-package org.mendora.verticles;
+package org.mendora.kernel.scanner.verticle;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.rxjava.core.Vertx;
-import org.mendora.properties.SysConfig;
+import org.mendora.kernel.properties.SysConfig;
 
 /**
  * Created by kam on 2018/2/4.

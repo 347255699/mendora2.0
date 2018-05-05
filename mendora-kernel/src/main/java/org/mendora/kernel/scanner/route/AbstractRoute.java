@@ -1,9 +1,9 @@
-package org.mendora.scanner.route;
+package org.mendora.kernel.scanner.route;
 
 import com.google.inject.Inject;
 import io.vertx.rxjava.core.Vertx;
 import io.vertx.rxjava.ext.web.Router;
-import org.mendora.properties.SysConfig;
+import org.mendora.kernel.properties.SysConfig;
 
 /**
  * created by:xmf
