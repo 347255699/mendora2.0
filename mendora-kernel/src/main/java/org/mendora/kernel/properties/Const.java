@@ -11,7 +11,6 @@ public interface Const {
     String LOGGER_FACTORY_CLASS = "logger.factory.class";
     String LOGGER_CONFIG_PATH = "logger.config.path";
     String VERTICLE_STORAGE_KEY = "verticle.storage.key";
-    String AVAILABLE_PROCESSORS = "available.processors";
     String VERTICLE_PACKAGE = "verticle.package";
     String SERVICE_PROVIDER_PACKAGE = "service.provider.package";
     // hazelcast
@@ -23,4 +22,7 @@ public interface Const {
     String WEB_LISTEN_PORT = "web.listen.port";
     String WEB_ROUTE_PACKAGE = "web.route.package";
     String WEB_REQUEST_BODY_SIZE="web.request.body.size";
+    String WEB_JWT_KEY_PASSWD = "web.jwt.key.passwd";
+    String WEB_JWT_ISSUER = "web.jwt.issuer";
+    String WEB_JWT_EXPIRES_MINUTES = "web.jwt.expires.minutes";
 }
