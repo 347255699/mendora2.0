@@ -59,12 +59,17 @@ public class Cluster {
                 .setClusterManager(new HazelcastClusterManager(config));
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
+                // building injector which is ioc container.
                 Injector subInjector = injector.createChildInjector(binderList(res.result(), injector));
                 deployVerticle(subInjector);
             }
         });
     }
 
+    /**
+     * deployment verticl group.
+     * @param injector
+     */
     private static void deployVerticle(Injector injector) {
         KernelConfig kernelConfig = injector.getInstance(KernelConfig.class);
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
@@ -88,6 +93,12 @@ public class Cluster {
         }
     }
 
+    /**
+     * build binder list.
+     * @param vertx
+     * @param injector
+     * @return
+     */
     private static List<AbstractModule> binderList(Vertx vertx, Injector injector) {
         List<AbstractModule> binders = new ArrayList<>();
         binders.add(new VertxBinder(vertx));

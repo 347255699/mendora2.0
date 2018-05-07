@@ -3,7 +3,6 @@ package org.mendora.web.route;
 import com.google.inject.Inject;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.rxjava.ext.web.RoutingContext;
-import lombok.extern.slf4j.Slf4j;
 import org.mendora.facade.data.mongo.rxjava.MongoAccesser;
 import org.mendora.kernel.scanner.route.AbstractRoute;
 import org.mendora.kernel.scanner.route.RequestRouting;
@@ -18,7 +17,6 @@ import org.mendora.util.result.JsonResult;
  * date:2018/3/7
  * description:
  */
-@Slf4j
 @Route("/mendora/demo")
 public class DemoRoute extends AbstractRoute {
     @Inject

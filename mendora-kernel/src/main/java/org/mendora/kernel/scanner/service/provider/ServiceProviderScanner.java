@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Slf4j
 public class ServiceProviderScanner {
-    public static final String MODULE_NAME = "SERVICE_PROVIDER_SCANNER:";
     public static final String REGISTER_METHOD_NAME = "register";
 
     /**
@@ -24,11 +23,11 @@ public class ServiceProviderScanner {
      */
     private void registerService(Class<?> clazz, Injector injector) {
         try {
-            log.info(MODULE_NAME + clazz.getName());
+            log.info(clazz.getName());
             Object o = injector.getInstance(clazz);
             clazz.getMethod(REGISTER_METHOD_NAME).invoke(o);
         } catch (Exception e) {
-            log.error(MODULE_NAME + e.getCause().getMessage());
+            log.error(e.getCause().getMessage());
         }
     }
 
@@ -40,7 +39,7 @@ public class ServiceProviderScanner {
      */
     public void scan(String packagePath, ClassLoader cl, Injector injector) {
         List<String> names = new PackageScannerImpl<>(packagePath, cl).classNames();
-        log.info(MODULE_NAME + names.size());
+        log.info(String.valueOf(names.size()));
         Observable.from(names)
                 .map(name -> {
                     Class<?> clazz = null;
@@ -53,7 +52,7 @@ public class ServiceProviderScanner {
                 })
                 .filter(clazz -> clazz.isAnnotationPresent(ServiceProvider.class))
                 .subscribe(clazz -> registerService(clazz, injector),
-                        err -> log.error(MODULE_NAME + err.getMessage()),
-                        () -> log.info(MODULE_NAME + "all the accesser provider scanning over."));
+                        err -> log.error(err.getMessage()),
+                        () -> log.info("all the accesser provider scanning over."));
     }
 }

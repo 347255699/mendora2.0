@@ -3,6 +3,7 @@ package org.mendora.kernel.scanner.route;
 import com.google.inject.Inject;
 import io.vertx.rxjava.core.Vertx;
 import io.vertx.rxjava.ext.web.Router;
+import lombok.extern.slf4j.Slf4j;
 import org.mendora.kernel.properties.SysConfig;
 
 /**
@@ -10,6 +11,7 @@ import org.mendora.kernel.properties.SysConfig;
  * date:2018/3/21
  * description:
  */
+@Slf4j
 public class AbstractRoute {
     @Inject
     protected Vertx vertx;
