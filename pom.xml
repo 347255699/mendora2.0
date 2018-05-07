@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mendora-kernel</module>
-        <module>mendora-Router</module>
+        <module>mendora-router</module>
     </modules>
 
     <properties>
