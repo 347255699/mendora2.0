@@ -11,10 +11,11 @@
     <modules>
         <module>mendora-kernel</module>
         <module>mendora-web</module>
-        <module>mendora-data</module>
+        <module>mendora-rear</module>
         <module>mendora-facade</module>
         <module>mendora-generate</module>
         <module>mendora-util</module>
+        <module>mendora-aider</module>
     </modules>
 
     <properties>

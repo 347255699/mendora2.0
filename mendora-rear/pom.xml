@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mendora-data</artifactId>
+    <artifactId>mendora-rear</artifactId>
     <properties>
         <common.version>1.0-SNAPSHOT</common.version>
     </properties>
