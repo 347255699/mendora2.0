@@ -17,6 +17,8 @@ public class AbstractRoute {
     protected SysConfig config;
     @Inject
     protected Router router;
+    @Inject
+    protected WebResult webResult;
 
     public void route(String prefix) {
     }

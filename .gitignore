@@ -5,6 +5,7 @@
 */test/
 /.vertx/
 
-mendora-router/.vertx/
+mendora-web/.vertx/
 mendora-kernel/.vertx/
 /log/
+mendora-generate/src/main/generated

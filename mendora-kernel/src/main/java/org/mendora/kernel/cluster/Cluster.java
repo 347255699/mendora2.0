@@ -7,11 +7,17 @@ import io.vertx.core.VertxOptions;
 import io.vertx.rxjava.core.Vertx;
 import io.vertx.rxjava.ext.web.Router;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
+import org.mendora.kernel.binder.DataBinder;
+import org.mendora.kernel.binder.FacadeBinder;
 import org.mendora.kernel.binder.VertxBinder;
 import org.mendora.kernel.binder.WebBinder;
+import org.mendora.kernel.client.ClientLoader;
 import org.mendora.kernel.config.KernelConfig;
 import org.mendora.kernel.properties.Const;
 import org.mendora.kernel.properties.SysConfig;
+import org.mendora.kernel.scanner.route.WebResult;
+import org.mendora.kernel.scanner.service.facade.FacadeScanner;
+import org.mendora.kernel.scanner.verticle.DataVerticle;
 import org.mendora.kernel.scanner.verticle.DefaultVerticle;
 import org.mendora.kernel.scanner.verticle.VerticleScanner;
 import org.mendora.kernel.scanner.verticle.WebVerticle;
@@ -61,27 +67,47 @@ public class Cluster {
         KernelConfig kernelConfig = injector.getInstance(KernelConfig.class);
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
         Vertx vertx = injector.getInstance(Vertx.class);
-        if (kernelConfig.isSanVerticle()) {
+        DefaultVerticle dv = null;
+        if (kernelConfig.isScanVerticle()) {
             VerticleScanner scanner = injector.getInstance(VerticleScanner.class);
             scanner.scan(sysConfig.property(Const.VERTICLE_PACKAGE), injector);
         }
         switch (kernelConfig.getMicroService()) {
             case WEB:
-                DefaultVerticle dv = injector.getInstance(WebVerticle.class);
-                dv.setInjector(injector);
-                vertx.getDelegate().deployVerticle(dv);
+                dv = injector.getInstance(WebVerticle.class);
+                break;
+            case REAR:
+                dv = injector.getInstance(DataVerticle.class);
                 break;
         }
-
+        if (dv != null) {
+            dv.setInjector(injector);
+            vertx.getDelegate().deployVerticle(dv);
+        }
     }
 
     private static List<AbstractModule> binderList(Vertx vertx, Injector injector) {
         List<AbstractModule> binders = new ArrayList<>();
         binders.add(new VertxBinder(vertx));
         KernelConfig config = injector.getInstance(KernelConfig.class);
+        SysConfig sysConfig = injector.getInstance(SysConfig.class);
+        if (config.isScanFacade()) {
+            FacadeBinder facadeBinder = new FacadeScanner().scan(sysConfig.property(Const.FACADE_PACKAGE), vertx.getDelegate());
+            binders.add(facadeBinder);
+        }
         switch (config.getMicroService()) {
             case WEB:
-                binders.add(new WebBinder(Router.router(vertx)));
+                WebBinder webBinder = new WebBinder();
+                webBinder.setRouter(Router.router(vertx));
+                webBinder.setWebResult(new WebResult());
+                binders.add(webBinder);
+                break;
+            case REAR:
+                ClientLoader loader = new ClientLoader(vertx, sysConfig);
+                DataBinder dataBinder = new DataBinder();
+                dataBinder.setPostgreSQLClient(loader.createPostgreSQLClient());
+                dataBinder.setMongoClient(loader.createMongoClient());
+                binders.add(dataBinder);
                 break;
         }
         return binders;

@@ -12,7 +12,7 @@ public interface Const {
     String LOGGER_CONFIG_PATH = "logger.config.path";
     String VERTICLE_STORAGE_KEY = "verticle.storage.key";
     String VERTICLE_PACKAGE = "verticle.package";
-    String SERVICE_PROVIDER_PACKAGE = "service.provider.package";
+    String PROVIDER_PACKAGE = "provider.package";
     // hazelcast
     String HAZELCAST_LOGGING_TYPE = "hazelcast.logging.type";
     String HAZELCAST_HEARBEAT_INTERVAL_SECONDS = "hazelcast.heartbeat.interval.seconds";
@@ -21,8 +21,13 @@ public interface Const {
     // web
     String WEB_LISTEN_PORT = "web.listen.port";
     String WEB_ROUTE_PACKAGE = "web.route.package";
-    String WEB_REQUEST_BODY_SIZE="web.request.body.size";
+    String WEB_REQUEST_BODY_SIZE = "web.request.body.size";
     String WEB_JWT_KEY_PASSWD = "web.jwt.key.passwd";
     String WEB_JWT_ISSUER = "web.jwt.issuer";
     String WEB_JWT_EXPIRES_MINUTES = "web.jwt.expires.minutes";
+    // rear
+    String DATA_DB_POSTGRE_URI = "data.db.postgre.uri";
+    String DATA_DB_MONGO_URI = "data.db.mongo.uri";
+    // facade
+    String FACADE_PACKAGE = "facade.package";
 }

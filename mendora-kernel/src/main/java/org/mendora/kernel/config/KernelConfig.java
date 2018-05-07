@@ -12,5 +12,6 @@ public class KernelConfig {
     private URL rootUrl;
     private ClassLoader classLoader;
     private MicroService microService;
-    private boolean sanVerticle;
+    private boolean scanVerticle;
+    private boolean scanFacade;
 }

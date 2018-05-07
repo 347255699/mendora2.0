@@ -9,14 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mendora-kernel</artifactId>
+    <artifactId>mendora-web</artifactId>
+
     <properties>
         <common.version>1.0-SNAPSHOT</common.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.mendora</groupId>
-            <artifactId>mendora-facade</artifactId>
+            <artifactId>mendora-kernel</artifactId>
             <version>${common.version}</version>
         </dependency>
     </dependencies>
@@ -32,5 +33,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
