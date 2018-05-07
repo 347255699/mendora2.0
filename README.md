@@ -85,7 +85,9 @@
 ```properties
 # base properties
 logger.factory.class=io.vertx.core.logging.SLF4JLogDelegateFactory
+### where your logger properties? ###
 logger.config.path=/config/log4j.properties
+### where your verticle group? ###
 verticle.package=org.mendora.web.verticle
 ## for web
 web.listen.port=8080
@@ -95,10 +97,12 @@ hazelcast.heartbeat.interval.seconds=15
 cluster.port=5701
 cluster.server.ips=127.0.0.1
 ## for facade
+# where your facade group?
 facade.package=org.mendora.facade.data
 
 # for web module
 ## for web
+### where your route group? ###
 web.route.package=org.mendora.web.route
 web.request.body.size=2048576
 ## for jwt
@@ -114,8 +118,11 @@ cors.max.age.seconds=3600
 ```properties
 # for base module
 logger.factory.class=io.vertx.core.logging.SLF4JLogDelegateFactory
+### where your logger properties? ###
 logger.config.path=/config/log4j.properties
+### where your verticle group? ###
 verticle.package=org.mendora.rear.verticle
+### where your service provider group? ###
 provider.package=org.mendora.rear
 ## for hazelcast
 hazelcast.logging.type=slf4j
@@ -155,4 +162,7 @@ data.db.mongo.uri=mongodb://<account>:<password>@<host>:<port>/<dbName>\
     // launching now baby!
     KernelLauncher.launch(config);
 ```
+## Swagger UI
+默认在we服务中集成swagger ui和editor。  
+可以通过`http://<host>:<port>/static/ui/index.html`和`http://<host>:<port>/static/editor/index.html`来访问API文档已经编辑器。
 
