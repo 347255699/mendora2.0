@@ -41,7 +41,7 @@
 		        -route route包，controller层主要业务包，注意模块划分
 		        -ApplicationMain.java 服务入口
 		    -resources
-		        -aider 启动辅助资源，api文档服务等
+		        -aider 系统辅助资源，api文档服务等
 			 
 		-facade rpc服务接口
 		    -java
@@ -68,3 +68,91 @@
 		-generate 代码生成辅助模块
 		    -generated 代码生成输出目录
 		    -java 接口置放处
+## 实践
+### step1:引包
+引入内核kernel包。
+```xml
+     <dependency>
+        <groupId>org.mendora</groupId>
+        <artifactId>mendora-kernel</artifactId>
+        <version>${common.version}</version>
+     </dependency>
+```
+### step2:编辑配置文件
+默认加载`resources`目录下`config`文件夹中的配置文件。即加载路径为`classpath:config/config.properties`。  
+包含`log4j.properties`。若为`web`服务需要额外添加`keystore.jceks`以支持JWT校验。
+#### web服务配置清单
+```properties
+# base properties
+logger.factory.class=io.vertx.core.logging.SLF4JLogDelegateFactory
+logger.config.path=/config/log4j.properties
+verticle.package=org.mendora.web.verticle
+## for web
+web.listen.port=8080
+## for hazelcast
+hazelcast.logging.type=slf4j
+hazelcast.heartbeat.interval.seconds=15
+cluster.port=5701
+cluster.server.ips=127.0.0.1
+## for facade
+facade.package=org.mendora.facade.data
+
+# for web module
+## for web
+web.route.package=org.mendora.web.route
+web.request.body.size=2048576
+## for jwt
+web.jwt.key.passwd=menfre
+web.jwt.issuer=mendora
+web.jwt.expires.minutes=30
+## for cors
+cors.allowed.methods=GET,POST,PUT,DELETE,PATCH,OPTIONS
+cors.allowed.headers=Content-Type,Content-Length,Authorization,Accept,X-Requested-With
+cors.max.age.seconds=3600
+```
+#### rear服务配置清单
+```properties
+# for base module
+logger.factory.class=io.vertx.core.logging.SLF4JLogDelegateFactory
+logger.config.path=/config/log4j.properties
+verticle.package=org.mendora.rear.verticle
+provider.package=org.mendora.rear
+## for hazelcast
+hazelcast.logging.type=slf4j
+hazelcast.heartbeat.interval.seconds=15
+cluster.port=5701
+cluster.server.ips=127.0.0.1
+## for facade
+facade.package=org.mendora.facade.data
+
+# for rear module
+## for postgre
+data.db.postgre.uri=postgre://<account>:<password>@<host>:<port>/<dbName>\
+  ?maxPoolSize=10&charset=UTF-8&queryTimeout=3000
+## for mongo
+data.db.mongo.uri=mongodb://<account>:<password>@<host>:<port>/<dbName>\
+  ?waitqueuemultiple=20000&maxPoolSize=30&minPoolSize=5
+```
+### step3:配置和启动内核
+在main方法中配置内核信息和定制行为。如启动web服务。
+```java
+    URL location = ApplicationMain.class.getProtectionDomain().getCodeSource().getLocation();
+    KernelConfig config = new KernelConfig();
+    // default ClassLoader
+    config.setClassLoader(ApplicationMain.class.getClassLoader());
+    // root path
+    config.setRootUrl(location);
+    // micro service type.
+    config.setMicroService(MicroService.WEB);
+    // want to scann verticle group?
+    config.setScanVerticle(false);
+    // want to scann facade group?
+    config.setScanFacade(true);
+    // setting aop entry group.
+    List<AopEntry> aopEntries = new ArrayList<>();
+    aopEntries.add(new AopEntry(Monitor.class, new MonitorMethodInterceptor()));
+    config.setAopEntries(aopEntries);
+    // launching now baby!
+    KernelLauncher.launch(config);
+```
+
