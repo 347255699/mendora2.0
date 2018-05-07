@@ -164,5 +164,5 @@ data.db.mongo.uri=mongodb://<account>:<password>@<host>:<port>/<dbName>\
 ```
 ## Swagger UI
 默认在we服务中集成swagger ui和editor。  
-可以通过`http://<host>:<port>/static/ui/index.html`和`http://<host>:<port>/static/editor/index.html`来访问API文档已经编辑器。
+可以通过`http://<host>:<port>/static/ui/index.html`和`http://<host>:<port>/static/editor/index.html`来访问API文档和编辑器。
 
