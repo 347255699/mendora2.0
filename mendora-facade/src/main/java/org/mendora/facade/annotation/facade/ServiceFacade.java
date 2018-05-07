@@ -1,4 +1,4 @@
-package org.mendora.facade.annotation;
+package org.mendora.facade.annotation.facade;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

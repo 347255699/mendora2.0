@@ -1,10 +1,15 @@
 package org.mendora.web;
 
+import org.mendora.facade.annotation.aop.Monitor;
 import org.mendora.kernel.KernelLauncher;
+import org.mendora.kernel.config.AopEntry;
 import org.mendora.kernel.config.KernelConfig;
 import org.mendora.kernel.config.MicroService;
+import org.mendora.web.aop.MonitorMethodInterceptor;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * created by:xmf
@@ -20,6 +25,9 @@ public class ApplicationMain {
         config.setMicroService(MicroService.WEB);
         config.setScanVerticle(false);
         config.setScanFacade(true);
+        List<AopEntry> aopEntries = new ArrayList<>();
+        aopEntries.add(new AopEntry(Monitor.class, new MonitorMethodInterceptor()));
+        config.setAopEntries(aopEntries);
         KernelLauncher.launch(config);
     }
 }

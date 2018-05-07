@@ -2,6 +2,7 @@ package org.mendora.kernel.cluster;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
+import com.google.inject.matcher.Matchers;
 import com.hazelcast.config.*;
 import io.vertx.core.VertxOptions;
 import io.vertx.rxjava.core.Vertx;
@@ -12,6 +13,7 @@ import org.mendora.kernel.binder.FacadeBinder;
 import org.mendora.kernel.binder.VertxBinder;
 import org.mendora.kernel.binder.WebBinder;
 import org.mendora.kernel.client.ClientLoader;
+import org.mendora.kernel.config.AopEntry;
 import org.mendora.kernel.config.KernelConfig;
 import org.mendora.kernel.properties.Const;
 import org.mendora.kernel.properties.SysConfig;
@@ -91,6 +93,19 @@ public class Cluster {
         binders.add(new VertxBinder(vertx));
         KernelConfig config = injector.getInstance(KernelConfig.class);
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
+        final List<AopEntry> aopEntries = config.getAopEntries();
+        if(aopEntries != null && aopEntries.size() > 0){
+            AbstractModule aopBinder = new AbstractModule() {
+                @Override
+                protected void configure() {
+                    aopEntries.forEach(entry -> {
+                        bindInterceptor(Matchers.any(), Matchers.annotatedWith(entry.getAnnotation()),
+                                entry.getMethodInterceptor());
+                    });
+                }
+            };
+            binders.add(aopBinder);
+        }
         if (config.isScanFacade()) {
             FacadeBinder facadeBinder = new FacadeScanner().scan(sysConfig.property(Const.FACADE_PACKAGE), vertx.getDelegate());
             binders.add(facadeBinder);

@@ -4,7 +4,7 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-import org.mendora.facade.annotation.ServiceFacade;
+import org.mendora.facade.annotation.facade.ServiceFacade;
 
 /**
  * Created by kam on 2018/3/26.

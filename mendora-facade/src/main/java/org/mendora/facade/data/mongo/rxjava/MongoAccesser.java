@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
+import org.mendora.facade.annotation.aop.Monitor;
 import rx.Single;
 
 /**
@@ -108,6 +109,7 @@ public class MongoAccesser {
     return this;
   }
 
+  @Monitor
   public Single<JsonObject> rxFind(JsonObject params) { 
     return Single.create(new io.vertx.rx.java.SingleOnSubscribeAdapter<>(fut -> {
       find(params, fut);

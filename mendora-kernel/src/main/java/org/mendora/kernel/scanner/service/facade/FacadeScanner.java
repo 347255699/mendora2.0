@@ -1,9 +1,7 @@
 package org.mendora.kernel.scanner.service.facade;
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 import io.vertx.core.Vertx;
-import org.mendora.facade.annotation.ServiceFacade;
+import org.mendora.facade.annotation.facade.ServiceFacade;
 import org.mendora.kernel.binder.FacadeBinder;
 import org.mendora.util.scanner.PackageScannerImpl;
 import org.slf4j.Logger;
