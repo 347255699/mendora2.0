@@ -19,7 +19,7 @@ public class FacadeScanner {
     private Logger log = LoggerFactory.getLogger(FacadeScanner.class);
 
     /**
-     * scanning all the com.udeafx.accesser.rear.accesser proxy blow target package.
+     * scanning all the proxy blow target package.
      *
      * @param packagePath
      * @return

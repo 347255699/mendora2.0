@@ -1,17 +1,18 @@
 package org.mendora.facade.data.postgre;
 
+import org.mendora.facade.annotation.facade.ServiceFacade;
+import org.mendora.facade.data.mongo.MongoAccesserVertxEBProxy;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-import org.mendora.facade.annotation.facade.ServiceFacade;
 
 /**
  * created by:xmf
  * date:2017/10/31
  * description:
  */
-@ServiceFacade(proxy = org.mendora.facade.data.mongo.MongoAccesserVertxEBProxy.class)
+@ServiceFacade(proxy = MongoAccesserVertxEBProxy.class)
 public interface PostgreAccesser {
 
     String EB_ADDRESS = "eb.data.postgre.accesser";

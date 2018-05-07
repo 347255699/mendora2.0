@@ -1,15 +1,15 @@
 package org.mendora.facade.data.mongo;
 
+import org.mendora.facade.annotation.facade.ServiceFacade;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-import org.mendora.facade.annotation.facade.ServiceFacade;
 
 /**
  * Created by kam on 2018/3/26.
  */
-@ServiceFacade(proxy = org.mendora.facade.data.mongo.MongoAccesserVertxEBProxy.class)
+@ServiceFacade(proxy = MongoAccesserVertxEBProxy.class)
 public interface MongoAccesser {
     String EB_ADDRESS = "eb.data.mongo.accesser";
 

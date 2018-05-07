@@ -1,8 +1,8 @@
 package org.mendora.util.result;
 
+import org.mendora.util.constant.RetCode;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import org.mendora.util.constant.RetCode;
 import org.mendora.util.constant.SysConst;
 
 import java.util.Map;

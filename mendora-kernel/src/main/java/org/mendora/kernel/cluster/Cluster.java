@@ -36,6 +36,7 @@ import java.util.List;
 public class Cluster {
     /**
      * launching Vertx micro kernel and deploy verticle.
+     * @param injector
      */
     public static void launch(Injector injector) {
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
@@ -65,6 +66,10 @@ public class Cluster {
         });
     }
 
+    /**
+     * deployment verticle group.
+     * @param injector
+     */
     private static void deployVerticle(Injector injector) {
         KernelConfig kernelConfig = injector.getInstance(KernelConfig.class);
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
@@ -88,13 +93,20 @@ public class Cluster {
         }
     }
 
+    /**
+     * build binder list.
+     *
+     * @param vertx
+     * @param injector
+     * @return
+     */
     private static List<AbstractModule> binderList(Vertx vertx, Injector injector) {
         List<AbstractModule> binders = new ArrayList<>();
         binders.add(new VertxBinder(vertx));
         KernelConfig config = injector.getInstance(KernelConfig.class);
         SysConfig sysConfig = injector.getInstance(SysConfig.class);
         final List<AopEntry> aopEntries = config.getAopEntries();
-        if(aopEntries != null && aopEntries.size() > 0){
+        if (aopEntries != null && aopEntries.size() > 0) {
             AbstractModule aopBinder = new AbstractModule() {
                 @Override
                 protected void configure() {

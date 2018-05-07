@@ -1,11 +1,11 @@
 package org.mendora.web;
 
 import org.mendora.facade.annotation.aop.Monitor;
+import org.mendora.web.aop.MonitorMethodInterceptor;
 import org.mendora.kernel.KernelLauncher;
 import org.mendora.kernel.config.AopEntry;
 import org.mendora.kernel.config.KernelConfig;
 import org.mendora.kernel.config.MicroService;
-import org.mendora.web.aop.MonitorMethodInterceptor;
 
 import java.net.URL;
 import java.util.ArrayList;
