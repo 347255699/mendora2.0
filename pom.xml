@@ -96,6 +96,11 @@
             <classifier>processor</classifier>
         </dependency>
         <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web-templ-thymeleaf</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombook.version}</version>
