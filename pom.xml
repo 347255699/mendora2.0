@@ -98,7 +98,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web-templ-thymeleaf</artifactId>
-            <version>3.5.1</version>
+            <version>${vertx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

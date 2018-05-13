@@ -11,6 +11,7 @@ import org.mendora.kernel.scanner.route.WebAuth;
 import org.mendora.util.constant.MongoCol;
 import org.mendora.util.generate.MongoAdapter;
 import org.mendora.util.result.JsonResult;
+import org.thymeleaf.TemplateEngine;
 
 /**
  * created by:xmf
@@ -23,12 +24,12 @@ public class DemoRoute extends AbstractRoute {
     private WebAuth webAuth;
     @Inject
     private MongoAccesser mongoAccesser;
-
+    @Inject
+    private TemplateEngine engine;
     @RequestRouting(path = "", method = HttpMethod.GET)
     public void demo(RoutingContext rc) {
         mongoAccesser.rxFind(MongoAdapter.find(MongoCol.COL_AP, JsonResult.empty()))
                 .subscribe(reply -> webResult.consume(reply, rc),
                         err -> webResult.fail(err, rc));
     }
-
 }
