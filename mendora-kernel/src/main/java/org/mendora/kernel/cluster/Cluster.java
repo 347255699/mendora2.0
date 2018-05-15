@@ -69,8 +69,7 @@ public class Cluster {
     }
 
     /**
-     * deployment verticle group.
-     *
+     * deployment verticl group.
      * @param injector
      */
     private static void deployVerticle(Injector injector) {
@@ -98,7 +97,6 @@ public class Cluster {
 
     /**
      * build binder list.
-     *
      * @param vertx
      * @param injector
      * @return
