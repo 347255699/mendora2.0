@@ -23,7 +23,6 @@ import java.util.jar.JarInputStream;
 @Slf4j
 @RequiredArgsConstructor
 public class PackageScannerImpl<T> implements PackageScanner<T> {
-    private static final String MODULE_NAME = "PSCANNER:";
     @NonNull
     private String packagePath;
     @NonNull
@@ -50,7 +49,7 @@ public class PackageScannerImpl<T> implements PackageScanner<T> {
                     }
                 }
             } catch (Exception e) {
-                log.error(MODULE_NAME + e.getMessage());
+                log.error(e.getMessage());
             }
         });
         return objs;
@@ -126,11 +125,11 @@ public class PackageScannerImpl<T> implements PackageScanner<T> {
         List<String> names = null;
         // contains the name of the class file. e.g., Demo.class will be stored as "Demo"
         if (isJarFile(filePath)) {
-            log.info(MODULE_NAME + filePath + " is a jar.");
+            log.info(filePath + " is a jar.");
             // jar file
             return readFromJarFile(filePath, splashPath, filter);
         } else {
-            log.info(MODULE_NAME + filePath + " is a directory.");
+            log.info(filePath + " is a directory.");
             // directory
             names = readFromDirectory(filePath);
         }

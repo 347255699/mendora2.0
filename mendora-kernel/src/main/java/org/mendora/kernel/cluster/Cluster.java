@@ -36,6 +36,7 @@ import java.util.List;
 public class Cluster {
     /**
      * launching Vertx micro kernel and deploy verticle.
+     *
      * @param injector
      */
     public static void launch(Injector injector) {
@@ -60,6 +61,7 @@ public class Cluster {
                 .setClusterManager(new HazelcastClusterManager(config));
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
+                // building injector which is ioc container.
                 Injector subInjector = injector.createChildInjector(binderList(res.result(), injector));
                 deployVerticle(subInjector);
             }
@@ -68,6 +70,7 @@ public class Cluster {
 
     /**
      * deployment verticle group.
+     *
      * @param injector
      */
     private static void deployVerticle(Injector injector) {

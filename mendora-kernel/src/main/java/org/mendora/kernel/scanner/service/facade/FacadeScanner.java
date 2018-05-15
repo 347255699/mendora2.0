@@ -1,11 +1,10 @@
 package org.mendora.kernel.scanner.service.facade;
 
 import io.vertx.core.Vertx;
+import lombok.extern.slf4j.Slf4j;
 import org.mendora.facade.annotation.facade.ServiceFacade;
 import org.mendora.kernel.binder.FacadeBinder;
 import org.mendora.util.scanner.PackageScannerImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +14,11 @@ import java.util.List;
  * date:2018/3/19
  * description:
  */
+@Slf4j
 public class FacadeScanner {
-    private Logger log = LoggerFactory.getLogger(FacadeScanner.class);
 
     /**
-     * scanning all the proxy blow target package.
+     * scanning all facade blow target package.
      *
      * @param packagePath
      * @return

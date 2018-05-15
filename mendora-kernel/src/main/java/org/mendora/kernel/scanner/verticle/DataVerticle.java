@@ -1,7 +1,6 @@
 package org.mendora.kernel.scanner.verticle;
 
 import io.vertx.core.DeploymentOptions;
-import lombok.extern.slf4j.Slf4j;
 import org.mendora.kernel.properties.Const;
 import org.mendora.kernel.scanner.service.provider.ServiceProviderScanner;
 
@@ -10,7 +9,7 @@ import org.mendora.kernel.scanner.service.provider.ServiceProviderScanner;
  * date:2018/3/12
  * description:
  */
-@Slf4j
+
 public class DataVerticle extends DefaultVerticle {
     @Override
     public DeploymentOptions options() {
