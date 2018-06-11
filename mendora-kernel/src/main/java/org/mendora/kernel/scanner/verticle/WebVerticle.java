@@ -6,7 +6,6 @@ import io.vertx.rxjava.ext.web.Router;
 import io.vertx.rxjava.ext.web.handler.BodyHandler;
 import io.vertx.rxjava.ext.web.handler.LoggerHandler;
 import io.vertx.rxjava.ext.web.handler.StaticHandler;
-import io.vertx.rxjava.ext.web.templ.ThymeleafTemplateEngine;
 import org.mendora.kernel.properties.Const;
 import org.mendora.kernel.scanner.route.RouteScanner;
 

@@ -21,7 +21,7 @@ public class WebResult {
      * }
      */
     public void succ(RoutingContext rc) {
-        common(JsonResult.succ(), rc);
+        common(JsonResult.succ().encode(), rc);
     }
 
     /**
@@ -32,7 +32,7 @@ public class WebResult {
      * }
      */
     public void succ(JsonObject payload, RoutingContext rc) {
-        common(JsonResult.succ(payload), rc);
+        common(JsonResult.succ(payload).encode(), rc);
     }
 
     /**
@@ -49,7 +49,7 @@ public class WebResult {
         JsonObject payload = JsonResult.two()
                 .put(SysConst.SYS_ROWS, rows)
                 .put(SysConst.SYS_SIZE, rows.size());
-        common(JsonResult.succ(payload), rc);
+        common(JsonResult.succ(payload).encode(), rc);
     }
 
     /**
@@ -59,7 +59,7 @@ public class WebResult {
      * }
      */
     public void fail(RoutingContext rc) {
-        common(JsonResult.fail(), rc);
+        common(JsonResult.fail().encode(), rc);
     }
 
     /**
@@ -70,7 +70,7 @@ public class WebResult {
      * }
      */
     public void fail(Throwable err, RoutingContext rc) {
-        common(JsonResult.fail(err), rc);
+        common(JsonResult.fail(err).encode(), rc);
     }
 
 
@@ -92,7 +92,7 @@ public class WebResult {
      * }
      */
     public void halfSucc(RoutingContext rc) {
-        common(JsonResult.halfSucc(), rc);
+        common(JsonResult.halfSucc().encode(), rc);
     }
 
     /**
@@ -103,7 +103,7 @@ public class WebResult {
      * }
      */
     public void halfSucc(JsonObject payload, RoutingContext rc) {
-        common(JsonResult.halfSucc(payload), rc);
+        common(JsonResult.halfSucc(payload).encode(), rc);
     }
 
     /**
@@ -120,7 +120,7 @@ public class WebResult {
         JsonObject payload = JsonResult.two()
                 .put(SysConst.SYS_ROWS, rows)
                 .put(SysConst.SYS_SIZE, rows.size());
-        common(JsonResult.halfSucc(payload), rc);
+        common(JsonResult.halfSucc(payload).encode(), rc);
     }
 
     /**
@@ -130,7 +130,7 @@ public class WebResult {
      * @param rc
      */
     public void consume(JsonObject payload, RoutingContext rc) {
-        common(payload, rc);
+        common(payload.encode(), rc);
     }
 
     /**
@@ -142,7 +142,7 @@ public class WebResult {
     public void consume(JsonObject payload, int defaultRetCode, RoutingContext rc) {
         if (!payload.containsKey(SysConst.SYS_RET_CODE))
             payload.put(SysConst.SYS_RET_CODE, defaultRetCode);
-        common(payload, rc);
+        common(payload.encode(), rc);
     }
 
     /**
@@ -162,8 +162,8 @@ public class WebResult {
      * @param payload
      * @param rc
      */
-    private void common(JsonObject payload, RoutingContext rc) {
-        rc.response().end(payload.encode());
+    private void common(String payload, RoutingContext rc) {
+        rc.response().end(payload);
     }
 
 }

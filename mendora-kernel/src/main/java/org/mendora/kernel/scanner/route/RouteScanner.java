@@ -53,7 +53,12 @@ public class RouteScanner {
                     try {
                         method.invoke(instance, rc);
                     } catch (Exception e) {
-                        log.error(e.getMessage());
+                        Throwable e0=e.getCause();
+                        if(e0!=null) {
+                            log.error(e0.getClass().getName() + "==>" + e0.getStackTrace()[0].toString());
+                        }else {
+                            log.error("nocause："+e.getStackTrace()[0].toString());
+                        }
                     }
                 });
             }

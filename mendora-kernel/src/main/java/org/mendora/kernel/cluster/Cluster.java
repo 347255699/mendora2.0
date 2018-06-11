@@ -8,6 +8,7 @@ import io.vertx.core.VertxOptions;
 import io.vertx.rxjava.core.Vertx;
 import io.vertx.rxjava.ext.web.Router;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
+import lombok.extern.slf4j.Slf4j;
 import org.mendora.kernel.binder.DataBinder;
 import org.mendora.kernel.binder.FacadeBinder;
 import org.mendora.kernel.binder.VertxBinder;
@@ -33,6 +34,7 @@ import java.util.List;
  * date:2018/3/12
  * description:
  */
+@Slf4j
 public class Cluster {
     /**
      * launching Vertx micro kernel and deploy verticle.
@@ -120,8 +122,22 @@ public class Cluster {
             binders.add(aopBinder);
         }
         if (config.isScanFacade()) {
-            FacadeBinder facadeBinder = new FacadeScanner().scan(sysConfig.property(Const.FACADE_PACKAGE), vertx.getDelegate());
-            binders.add(facadeBinder);
+            String[] packages = new String[0];
+            try {
+                packages = sysConfig.property(Const.FACADE_PACKAGE).split(",");
+            } catch (NullPointerException e) {
+                log.warn(Const.FACADE_PACKAGE + "is not setted");
+            }
+            FacadeScanner fscaner = new FacadeScanner();
+            String reg = "(\\w+\\.)*\\w+";
+            for (String pac : packages) {
+                if (pac.matches(reg)) {
+                    FacadeBinder facadeBinder = fscaner.scan(pac, vertx.getDelegate());
+                    binders.add(facadeBinder);
+                } else {
+                    log.warn(Const.FACADE_PACKAGE + " not properly: " + pac);
+                }
+            }
         }
         switch (config.getMicroService()) {
             case WEB:

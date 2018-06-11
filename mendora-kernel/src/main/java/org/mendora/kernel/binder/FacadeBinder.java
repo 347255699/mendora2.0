@@ -24,11 +24,11 @@ public class FacadeBinder extends AbstractModule {
     protected void configure() {
         if (facades != null && vertx != null && proxys != null) {
             for (int i = 0; i < facades.size(); i++) {
-                Constructor<?> cons[] = proxys.get(i).getConstructors();
                 try {
-                    bind(facades.get(i)).toInstance(cons[0].newInstance(vertx));
+                    Constructor cons = proxys.get(i).getConstructor(Vertx.class);
+                    bind(facades.get(i)).toInstance(cons.newInstance((Object) vertx));
                 } catch (Exception e) {
-                    log.error(e.getMessage());
+                    log.error("facade err[{}]", e.getCause().getMessage());
                 }
             }
         }
