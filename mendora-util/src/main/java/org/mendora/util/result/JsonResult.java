@@ -17,11 +17,11 @@ public class JsonResult {
         return new JsonObject(MapResult.allocate(initialCapacity));
     }
 
-    public static JsonObject one(){
+    public static JsonObject allocateOne(){
         return allocate(1);
     }
 
-    public static JsonObject two(){
+    public static JsonObject allocateTwo(){
         return allocate(2);
     }
 

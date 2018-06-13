@@ -38,7 +38,7 @@ public class MongoAdapter {
         JsonObject dateRange;
         if ((hasTimeRange && hasRecent) || hasTimeRange) {
             // 以自定义时间区间为准
-            dateRange = JsonResult.two();
+            dateRange = JsonResult.allocateTwo();
             if (query.containsKey(PAGE_MODEL_START_TIME) && query.containsKey(PAGE_MODEL_END_TIME))
                 dateRange.put(MongoSymbol.$gte, (String) query.remove(PAGE_MODEL_START_TIME)).put(MongoSymbol.$lte, (String) query.remove(PAGE_MODEL_END_TIME));
             else if (query.containsKey(PAGE_MODEL_START_TIME))
@@ -49,7 +49,7 @@ public class MongoAdapter {
         if (!hasTimeRange && hasRecent) {
             // 以确定的时间区间为准(近几天)
             String localDate;
-            dateRange = JsonResult.one();
+            dateRange = JsonResult.allocateOne();
             int recent = (Integer) query.remove(PAGE_MODEL_RECENT);
             if (recent > 1) {
                 localDate = LocalDate.now().minusDays(--recent)
@@ -84,7 +84,7 @@ public class MongoAdapter {
     }
 
     public static JsonObject save(String colName, JsonObject doc) {
-        return JsonResult.two()
+        return JsonResult.allocateOne()
                 .put(MongoReferences.COLLECTION.val(), colName)
                 .put(MongoReferences.DOCUMENT.val(), doc);
     }

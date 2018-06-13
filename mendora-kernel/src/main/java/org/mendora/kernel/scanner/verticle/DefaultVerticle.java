@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
-import io.vertx.rxjava.core.Vertx;
 import lombok.extern.slf4j.Slf4j;
 import org.mendora.kernel.properties.SysConfig;
 
@@ -13,8 +12,6 @@ import org.mendora.kernel.properties.SysConfig;
  */
 @Slf4j
 public abstract class DefaultVerticle extends AbstractVerticle {
-    @Inject
-    protected Vertx vertx;
     @Inject
     protected SysConfig config;
 

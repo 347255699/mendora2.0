@@ -2,7 +2,7 @@ package org.mendora.kernel.scanner.service.provider;
 
 import com.google.inject.Injector;
 import lombok.extern.slf4j.Slf4j;
-import org.mendora.util.scanner.PackageScannerImpl;
+import org.mendora.kernel.scanner.base.PackageScannerImpl;
 import rx.Observable;
 
 import java.util.List;
@@ -27,7 +27,12 @@ public class ServiceProviderScanner {
             Object o = injector.getInstance(clazz);
             clazz.getMethod(REGISTER_METHOD_NAME).invoke(o);
         } catch (Exception e) {
-            log.error(e.getCause().getMessage());
+            Throwable e0=e.getCause();
+            if(e0!=null) {
+                log.error(e0.getClass().getName() + "==>" + e0.getStackTrace()[0].toString());
+            }else {
+                log.error("nocause："+e.getStackTrace()[0].toString());
+            }
         }
     }
 

@@ -239,7 +239,7 @@ public class MongoAccesserImpl implements MongoAccesser {
         // has 'sortBy' field?
         if (!pageOptions.containsKey(sortFlag))
             // default sort by "_id" field asc.
-            pageOptions.put(sortFlag, JsonResult.one().put(MongoReferences._ID.val(), MongoReferences.ASC.number()));
+            pageOptions.put(sortFlag, JsonResult.allocateOne().put(MongoReferences._ID.val(), MongoReferences.ASC.number()));
         FindOptions findOptions = new FindOptions()
                 .setSkip(PageReferences.SIZE.number(pageOptions) * (PageReferences.CURR_PAGE.number(pageOptions) - 1))
                 .setLimit(PageReferences.SIZE.number(pageOptions))

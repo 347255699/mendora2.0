@@ -73,7 +73,7 @@ public class ClientLoader {
      * @return
      */
     public MongoClient createMongoClient() {
-        JsonObject mongoUri = JsonResult.one()
+        JsonObject mongoUri = JsonResult.allocateOne()
                 .put("connection_string", sysConfig.property(Const.DATA_DB_MONGO_URI));
         return MongoClient.createShared(vertx, mongoUri);
     }

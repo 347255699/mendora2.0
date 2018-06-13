@@ -46,7 +46,7 @@ public class WebResult {
      * }
      */
     public void succ(JsonArray rows, RoutingContext rc) {
-        JsonObject payload = JsonResult.two()
+        JsonObject payload = JsonResult.allocateTwo()
                 .put(SysConst.SYS_ROWS, rows)
                 .put(SysConst.SYS_SIZE, rows.size());
         common(JsonResult.succ(payload).encode(), rc);
@@ -117,7 +117,7 @@ public class WebResult {
      * }
      */
     public void halfSucc(JsonArray rows, RoutingContext rc) {
-        JsonObject payload = JsonResult.two()
+        JsonObject payload = JsonResult.allocateTwo()
                 .put(SysConst.SYS_ROWS, rows)
                 .put(SysConst.SYS_SIZE, rows.size());
         common(JsonResult.halfSucc(payload).encode(), rc);

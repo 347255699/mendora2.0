@@ -1,10 +1,10 @@
 package org.mendora.util.efficiency.syncSubscriber;
 
-import com.udeafx.util.result.AsyncHandlerResult;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.mendora.util.result.AsyncHandlerResult;
 import rx.Subscriber;
 
 /**

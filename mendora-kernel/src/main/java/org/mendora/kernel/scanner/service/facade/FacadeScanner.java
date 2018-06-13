@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import lombok.extern.slf4j.Slf4j;
 import org.mendora.facade.annotation.facade.ServiceFacade;
 import org.mendora.kernel.binder.FacadeBinder;
-import org.mendora.util.scanner.PackageScannerImpl;
+import org.mendora.kernel.scanner.base.PackageScannerImpl;
 
 import java.util.ArrayList;
 import java.util.List;

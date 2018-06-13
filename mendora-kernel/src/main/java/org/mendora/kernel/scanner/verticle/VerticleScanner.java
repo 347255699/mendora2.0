@@ -60,7 +60,12 @@ public class VerticleScanner {
                             });
             names.forEach(log::info);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            Throwable e0=e.getCause();
+            if(e0!=null) {
+                log.error(e0.getClass().getName() + "==>" + e0.getStackTrace()[0].toString());
+            }else {
+                log.error("nocause："+e.getStackTrace()[0].toString());
+            }
         }
     }
 
@@ -75,7 +80,7 @@ public class VerticleScanner {
             if (res.succeeded()) {
                 String dId = res.result();
                 String vName = verticle.getClass().getName();
-                storage.add(JsonResult.two().put(DEPLOY_ID, dId).put(VERTICLE_NAME, vName));
+                storage.add(JsonResult.allocateTwo().put(DEPLOY_ID, dId).put(VERTICLE_NAME, vName));
             } else {
                 log.error("scanning {} error happened.", verticle.getClass().getName());
             }

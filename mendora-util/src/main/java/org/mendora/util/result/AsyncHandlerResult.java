@@ -21,7 +21,7 @@ public class AsyncHandlerResult {
     }
 
     public static void succ(Handler<AsyncResult<JsonObject>> handler) {
-        handler.handle(Future.succeededFuture());
+        handler.handle(Future.succeededFuture(JsonResult.succ()));
     }
 
 

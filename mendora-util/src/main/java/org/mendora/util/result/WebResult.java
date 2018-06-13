@@ -45,7 +45,7 @@ public class WebResult {
      * }
      */
     public static void succ(JsonArray rows, RoutingContext rc) {
-        JsonObject payload = JsonResult.two()
+        JsonObject payload = JsonResult.allocateTwo()
                 .put(SysConst.SYS_ROWS, rows)
                 .put(SysConst.SYS_SIZE, rows.size());
         common(JsonResult.succ(payload), rc);
@@ -80,7 +80,7 @@ public class WebResult {
      * "errMsg":[errMsg]
      * }
      */
-    public static void fail(String errMsg, RoutingContext rc){
+    public static void fail(String errMsg, RoutingContext rc) {
         fail(new RuntimeException(errMsg), rc);
     }
 
@@ -116,7 +116,7 @@ public class WebResult {
      * }
      */
     public static void halfSucc(JsonArray rows, RoutingContext rc) {
-        JsonObject payload = JsonResult.two()
+        JsonObject payload = JsonResult.allocateTwo()
                 .put(SysConst.SYS_ROWS, rows)
                 .put(SysConst.SYS_SIZE, rows.size());
         common(JsonResult.halfSucc(payload), rc);
@@ -153,6 +153,16 @@ public class WebResult {
         HttpServerResponse response = rc.response();
         header.fieldNames().forEach(k -> response.putHeader(k, header.getString(k)));
         response.end(result);
+    }
+
+    /**
+     * customize your response payload
+     *
+     * @param payload
+     */
+    public static void comsume(String payload, RoutingContext rc) {
+        HttpServerResponse response = rc.response();
+        response.end(payload);
     }
 
     /**
